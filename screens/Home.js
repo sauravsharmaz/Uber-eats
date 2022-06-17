@@ -1,7 +1,8 @@
 import HeaderTabs from '../components/HeaderTabs';
 import SearchBar from '../components/SearchBar';
-import { StyleSheet, View } from 'react-native';
-import { StatusBar } from "react-native";
+import Categories from '../components/Categories';
+import RestrauntItem from '../components/RestrauntItem';
+import { StyleSheet, View, StatusBar, ScrollView } from 'react-native';
 
 export default function HomeScreen() {
   return (
@@ -9,6 +10,10 @@ export default function HomeScreen() {
       <StatusBar backgroundColor="#eee" barStyle="dark-content" />
       <HeaderTabs />
       <SearchBar />
+      <ScrollView>
+        <Categories />
+        <RestrauntItem />
+      </ScrollView>
     </View>
   )
 }
