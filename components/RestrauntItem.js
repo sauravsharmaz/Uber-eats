@@ -1,19 +1,19 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
-export default function RestrauntItem() {
+export default function RestrauntItems({ data }) {
+  console.log(data)
   return (
     <View>
-      <ImageBanner
-        img_path={require("../assets/images/other_place.jpg")}
-        img_heading="Abupur country side cafe"
-        prep_time="30 - 40 min"
-        rating="4.9" />
-      <ImageBanner
-        img_path={require("../assets/images/restraunt_front.jpg")}
-        img_heading="Abupur country side cafe"
-        prep_time="20 - 25 min"
-        rating="4.1" />
+      {data.map((obj, index) =>
+        <View key={index}>
+          <ImageBanner
+            img_path={{ uri: obj.image_url }}
+            img_heading={obj.name}
+            adress={obj.location.address1}
+            rating={obj.rating} />
+        </View>
+      )}
     </View>
   )
 }
@@ -22,12 +22,12 @@ function ImageBanner(props) {
   return (
     <>
       <MaterialCommunityIcons style={styles.fav_icon} name="heart-outline" size={30} color="black" />
-      <TouchableOpacity style={styles.image_banner_container}>
+      <TouchableOpacity style={styles.image_banner_container} activeOpacity={0.8}>
         <Image style={styles.banner_image} source={props.img_path} />
         <View style={styles.banner_text_container}>
           <View>
             <Text style={styles.img_heading}>{props.img_heading}</Text>
-            <Text style={styles.prep_time}>{props.prep_time}</Text>
+            <Text style={styles.adress}>{props.adress}</Text>
           </View>
           <View style={styles.rating_container}>
             <MaterialCommunityIcons name="star" size={20} color="#ffc107" />
@@ -41,8 +41,7 @@ function ImageBanner(props) {
 
 const styles = StyleSheet.create({
   image_banner_container: {
-    marginTop: 10,
-    marginBottom: 10,
+    marginTop: 2,
     backgroundColor: "white",
     borderRadius: 10,
   },
@@ -71,7 +70,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold"
   },
-  prep_time: {
+  adress: {
     color: "grey",
   },
   rating_container: {
